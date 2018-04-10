@@ -1,5 +1,5 @@
 {
-  "name": "fixture-interface",
+  "name": "@sparkpost/fixture-interface",
   "version": "1.0.0",
   "description": "A simple interface to make helpers for setting up and tearing down data needed for tests.",
   "main": "fixture.js",
@@ -22,6 +22,10 @@
     "test",
     "fixture"
   ],
-  "author": "@beardyman",
-  "license": "MIT"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SparkPost/fixture-interface.git"
+  },
+  "author": "@Sparkpost",
+  "license": "Apache-2.0"
 }
