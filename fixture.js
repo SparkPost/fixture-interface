@@ -23,14 +23,14 @@ class Fixture {
    * @desc Inserts one record into the data source. Intended to be overridden.
    */
   insert() {
-    notImplemented('insert')
+    notImplemented('insert');
   }
 
   /**
    * @desc Removes one record from the data source. Intended to be overridden.
    */
   remove() {
-    notImplemented('remove')
+    notImplemented('remove');
   }
 
   /**
@@ -39,9 +39,9 @@ class Fixture {
    * @param jsonArray {Array} - an array of data objects to be provisioned
    * @returns {Promise} - A promise that resolves with an array of the resulting insert resolutions.
    */
-  provision(jsonArray){
-    return Promise.map(_.cloneDeep(jsonArray), (dataObj)=>
-      this.insert(dataObj).then(()=>
+  provision(jsonArray) {
+    return Promise.map(_.cloneDeep(jsonArray), (dataObj) =>
+      this.insert(dataObj).then(() =>
         this.data.push(dataObj)
       ));
   }
@@ -61,7 +61,7 @@ class Fixture {
    * @returns {Promise}
    */
   cleanup() {
-    return Promise.map(this.data, (item)=>this.remove(item)).then(()=> this.data = []);
+    return Promise.map(this.data, (item) => this.remove(item)).then(() => this.data = []);
   }
 }
 
