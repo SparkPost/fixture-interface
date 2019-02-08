@@ -2,6 +2,7 @@
 
 const Promise = require('bluebird');
 const _ = require('lodash');
+const util = require('util');
 
 /**
  * Helper for throwing not implemented errors for functions that are expected to be overridden
@@ -47,11 +48,21 @@ class Fixture {
   }
 
   /**
+   * @deprecated - use alsoRemove instead
    * @desc A convenience method for adding data that is generated during the execution of a test. Any data added with this method will be cleaned up when `.cleanup` is called.
    *
    * @param data {Object}
    */
   addData(data) {
+    return this.alsoRemove(data);
+  }
+
+  /**
+   * @desc A convenience method for adding data that is generated during the execution of a test. Any data added with this method will be cleaned up when `.cleanup` is called.
+   *
+   * @param data {Object}
+   */
+  alsoRemove(data) {
     return this.data.push(data);
   }
 
@@ -64,5 +75,8 @@ class Fixture {
     return Promise.map(this.data, (item) => this.remove(item)).then(() => this.data = []);
   }
 }
+
+// depricate addData in favor `alsoRemove`
+util.deprecate(Fixture.prototype.addData, '', 'DEP0001');
 
 module.exports = Fixture;
