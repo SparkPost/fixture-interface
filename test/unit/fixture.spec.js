@@ -63,7 +63,7 @@ describe('Fixture', () => {
     }));
 
     it('should add an object to the data collection', () => {
-      expect(testFixture.addData(1)).toBe(1);
+      expect(testFixture.alsoRemove(1)).toBe(1);
       expect(testFixture.data.length).toBe(1);
     });
 
