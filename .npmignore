@@ -1,3 +1,6 @@
 test
-sample-test
+.idea
 .gitignore
+.travis.yml
+.eslintrc.json
+example
