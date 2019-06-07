@@ -84,7 +84,7 @@ class Fixture {
 
 /**
  * Helper for throwing not implemented errors for functions that are expected to be overridden
- * @param {string} name
+ * @param {string} name - Name of the function to implement
  */
 function notImplemented(name) {
   throw new Error(`${name} must be implmented in your data fixture`);
