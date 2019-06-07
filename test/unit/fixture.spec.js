@@ -1,73 +1,75 @@
-'use strict';
 
-describe('Fixture', () => {
+
+describe('Fixture', function() {
   const sinon = require('sinon');
   let Fixture
     , testFixture
     , insertStub
     , removeStub;
 
-  beforeAll(() => {
+  beforeAll(function() {
     Fixture = require('../../fixture');
   });
 
-  beforeEach(() => {
+  beforeEach(function() {
     insertStub = sinon.stub().resolves('hi');
     removeStub = sinon.stub().resolves('bye');
   });
 
-  describe('constructor', () => {
+  describe('constructor', function() {
     let constructorFixture;
 
-    beforeEach(() => {
+    beforeEach(function() {
       constructorFixture = new Fixture();
     });
 
-    it('should register the insert and remove methods', () => {
+    it('should register the insert and remove methods', function() {
       expect(constructorFixture.data).toEqual([]);
     });
 
-    it('shouldn\'t have an initial insert', () => {
+    it('shouldn\'t have an initial insert', function() {
       try {
         constructorFixture.insert();
         throw new Error('why here?');
-      } catch (e) {
-        expect(e.message).toBe('insert must be implmented in your data fixture');
+      } catch (err) {
+        expect(err.message).toBe('insert must be implmented in your data fixture');
       }
     });
 
 
-    it('shouldn\'t have an initial remove', () => {
+    it('shouldn\'t have an initial remove', function() {
       try {
         constructorFixture.remove();
         throw new Error('why here?');
-      } catch (e) {
-        expect(e.message).toBe('remove must be implmented in your data fixture');
+      } catch (err) {
+        expect(err.message).toBe('remove must be implmented in your data fixture');
       }
     });
   });
 
-  describe('methods', () => {
-    beforeEach(() => {
+  describe('methods', function() {
+    beforeEach(function() {
       testFixture = new Fixture();
       testFixture.insert = insertStub;
       testFixture.remove = removeStub;
     });
 
-    it('should invoke invoke insert for each item passed to provision', () => testFixture.provision([1, 2, 3]).then((res) => {
-      expect(res[0]).toBe(1);
-      expect(res[1]).toBe(2);
-      expect(res[2]).toBe(3);
-      expect(insertStub.callCount).toBe(3);
-      expect(testFixture.data.length).toBe(3);
-    }));
+    it('should invoke invoke insert for each item passed to provision', function() {
+      return testFixture.provision([1, 2, 3]).then((res) => {
+        expect(res[0]).toBe(1);
+        expect(res[1]).toBe(2);
+        expect(res[2]).toBe(3);
+        expect(insertStub.callCount).toBe(3);
+        expect(testFixture.data.length).toBe(3);
+      });
+    });
 
-    it('should add an object to the data collection', () => {
+    it('should add an object to the data collection', function() {
       expect(testFixture.alsoRemove(1)).toBe(1);
       expect(testFixture.data.length).toBe(1);
     });
 
-    it('should remove all data', () => {
+    it('should remove all data', function() {
       testFixture.data.push(1,2,3);
 
       return testFixture.cleanup().then(() => {

@@ -1,4 +1,4 @@
-'use strict';
+
 
 const Promise = require('bluebird');
 const _ = require('lodash');
@@ -19,19 +19,15 @@ class Fixture {
 
   /**
    * Inserts one record into the data source. Intended to be overridden.
-   *
-   * @param {Object | *} data - a single data object to be inserted into the data source.
    */
-  insert(data) {
+  insert() {
     notImplemented('insert');
   }
 
   /**
    * Removes one record from the data source. Intended to be overridden.
-   *
-   * @param {Object | *} data - a single data object to be inserted into the data source.
    */
-  remove(data) {
+  remove() {
     notImplemented('remove');
   }
 
@@ -58,7 +54,7 @@ class Fixture {
    * defined that `remove` will need to remove the data.
    */
   addData(data) {
-    return this.alsoRemove(data);
+    this.alsoRemove(data);
   }
 
   /**
@@ -69,7 +65,7 @@ class Fixture {
    * defined that `remove` will need to remove the data.
    */
   alsoRemove(data) {
-    return this.data.push(data);
+    this.data.push(data);
   }
 
   /**
