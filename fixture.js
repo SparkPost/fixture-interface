@@ -5,37 +5,34 @@ const _ = require('lodash');
 const util = require('util');
 
 /**
- * Helper for throwing not implemented errors for functions that are expected to be overridden
- * @param name
+ * The Fixture class is meant to be extended so that specific implementations share the same interface.  A
+ * fixture is meant to supply data for testing purposes so that tests can be reliably repeatable.  See README.md for
+ * more information to use fixtures and examples.
  */
-function notImplemented(name) {
-  throw new Error(`${name} must be implmented in your data fixture`);
-}
-
 class Fixture {
   /**
-   * @desc Creates a distinct dataset for a test or test suite. Expects _insert and _remove to be overridden
+   * Creates a distinct dataset for a test or test suite. Expects _insert and _remove to be overridden
    */
   constructor() {
     this.data = [];
   }
 
   /**
-   * @desc Inserts one record into the data source. Intended to be overridden.
+   * Inserts one record into the data source. Intended to be overridden.
    */
   insert() {
     notImplemented('insert');
   }
 
   /**
-   * @desc Removes one record from the data source. Intended to be overridden.
+   * Removes one record from the data source. Intended to be overridden.
    */
   remove() {
     notImplemented('remove');
   }
 
   /**
-   * @desc Takes a given data set and uses the insert function to provision it.
+   * Takes a given data set and uses the insert function to provision it.
    *
    * @param jsonArray {Array} - an array of data objects to be provisioned
    * @returns {Promise} - A promise that resolves with an array of the resulting insert resolutions.
@@ -48,8 +45,10 @@ class Fixture {
   }
 
   /**
+   * A convenience method for adding data that is generated during the execution of a test. Any data added with this
+   * method will be cleaned up when `.cleanup` is called. (DEPRECATED IN FAVOR OF `alsoRemove`)
+   *
    * @deprecated - use alsoRemove instead
-   * @desc A convenience method for adding data that is generated during the execution of a test. Any data added with this method will be cleaned up when `.cleanup` is called.
    *
    * @param data {Object}
    */
@@ -58,7 +57,7 @@ class Fixture {
   }
 
   /**
-   * @desc A convenience method for adding data that is generated during the execution of a test. Any data added with this method will be cleaned up when `.cleanup` is called.
+   * A convenience method for adding data that is generated during the execution of a test. Any data added with this method will be cleaned up when `.cleanup` is called.
    *
    * @param data {Object}
    */
@@ -67,7 +66,7 @@ class Fixture {
   }
 
   /**
-   * @desc Clears data by invoking the remove method for each object that was previously provisioned or added.
+   * Clears data by invoking the remove method for each object that was previously provisioned or added.
    *
    * @returns {Promise}
    */
@@ -76,7 +75,15 @@ class Fixture {
   }
 }
 
+/**
+ * Helper for throwing not implemented errors for functions that are expected to be overridden
+ * @param name
+ */
+function notImplemented(name) {
+  throw new Error(`${name} must be implmented in your data fixture`);
+}
+
 // depricate addData in favor `alsoRemove`
-util.deprecate(Fixture.prototype.addData, '', 'DEP0001');
+util.deprecate(Fixture.prototype.addData, '`addData` has been deprecated in favor of `alsoRemove`', 'DEP0001');
 
 module.exports = Fixture;

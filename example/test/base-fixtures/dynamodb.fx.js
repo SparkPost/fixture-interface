@@ -2,7 +2,6 @@
 
 const Fx = require('../../../fixture');
 const Aws = require('aws-sdk');
-const Promise = require('bluebird');
 
 /*
  * base class for interfacing with aws's dynamodb
@@ -17,16 +16,19 @@ class DynamoFx extends Fx {
 
     // setup dynamo connection info
     const client = new Aws.DynamoDB.DocumentClient(connConfig);
-    Promise.promisifyAll(client);
     this.db = client;
   }
 
-  insert(item) {
-    return this.db.putAsync({TableName: this.tableName, Item: item});
+  makeKey(item){
+    throw new Error(`'makeKey' must be implmented in your DyanmoDB data fixture`);
   }
 
-  remove(key) {
-    return this.db.deleteAsync({TableName: this.tableName, Key: key});
+  insert(item) {
+    return this.db.put({TableName: this.tableName, Item: item}).promise();
+  }
+
+  remove(item) {
+    return this.db.delete({TableName: this.tableName, Key: this.makeKey(item)}).promise();
   }
 }
 

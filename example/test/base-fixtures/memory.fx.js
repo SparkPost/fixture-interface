@@ -5,7 +5,10 @@ const Fx = require('../../../fixture');
 const mem = require('../../data-store/memory');
 const Promise = require('bluebird');
 
-// base class for interfacing with aws's dynamodb
+/**
+ * Base class for manipulating a structured in memeory store.  All items stored are expected to have a property called
+ * `hash_key`.
+ */
 class MemoryFx extends Fx {
 
   constructor() {
@@ -17,8 +20,8 @@ class MemoryFx extends Fx {
     return Promise.resolve();
   }
 
-  remove(key) {
-    delete mem[key.hash_key];
+  remove(item) {
+    delete mem[item.hash_key];
     return Promise.resolve();
   }
 }
