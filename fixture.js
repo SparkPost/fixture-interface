@@ -52,9 +52,11 @@ class Fixture {
    *
    * @param {Object} data - an object in the same format as what is passed to provision.  It only needs the fields
    * defined that `remove` will need to remove the data.
+   *
+   * @returns {number} The number of items added to the internal cache.
    */
   addData(data) {
-    this.alsoRemove(data);
+    return this.alsoRemove(data);
   }
 
   /**
@@ -63,9 +65,11 @@ class Fixture {
    *
    * @param {Object} data - an object in the same format as what is passed to provision.  It only needs the fields
    * defined that `remove` will need to remove the data.
+   *
+   * @returns {number} The number of items added to the internal cache.
    */
   alsoRemove(data) {
-    this.data.push(data);
+    return this.data.push(data);
   }
 
   /**
