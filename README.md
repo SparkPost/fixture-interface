@@ -17,7 +17,7 @@ data source and then pass in relevant table or indexing information upon creatio
 different databases or projects using that same database.  Elasticsearch comes to mind as an example of such a database.  
 However, I've found that for databases with a little more structure (SQL or partial schema NoSQL), creating a fixture
 class for the database type and then extending that on a per table or schema basis has been most useful. Please refer to 
-the [examples directory](/exmples) for a fully implemented fixture example as well as executable tests using the fixture.
+the [examples directory](/example) for a fully implemented fixture example as well as executable tests using the fixture.
 There are two examples of parent fixtures, one for an in memory store and another for AWS DynamoDB although it is not used
 in the exmaple tests. 
 
@@ -101,7 +101,7 @@ The `cleanup` method takes advantage of `remove`.
 There may come a time where the database operation that you're testing is simply deleting data from the database.  
 This is pretty easy to account for since you can just provision data with your fixture, delete it during your test and 
 assert that its gone.  The cleanup function will try to delete that data however most databases will silently ignore a 
-delete call for something that isn't there.  If not your `remove` implementation may have to account for this.
+delete call for something that isn't there.  If not, your `remove` implementation may have to account for this.
 
 When testing creation operations it ends up being a little different.  You can manage cleaning up any created data 
 yourself, however your fixture has a method called `alsoRemove` and this comes in handy if you want to keep your tests

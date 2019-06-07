@@ -19,23 +19,27 @@ class Fixture {
 
   /**
    * Inserts one record into the data source. Intended to be overridden.
+   *
+   * @param {Object | *} data - a single data object to be inserted into the data source.
    */
-  insert() {
+  insert(data) {
     notImplemented('insert');
   }
 
   /**
    * Removes one record from the data source. Intended to be overridden.
+   *
+   * @param {Object | *} data - a single data object to be inserted into the data source.
    */
-  remove() {
+  remove(data) {
     notImplemented('remove');
   }
 
   /**
    * Takes a given data set and uses the insert function to provision it.
    *
-   * @param jsonArray {Array} - an array of data objects to be provisioned
-   * @returns {Promise} - A promise that resolves with an array of the resulting insert resolutions.
+   * @param {Array} jsonArray - an array of data objects to be provisioned
+   * @returns {Promise} A promise that resolves with an array of the resulting insert resolutions.
    */
   provision(jsonArray) {
     return Promise.map(_.cloneDeep(jsonArray), (dataObj) =>
@@ -50,16 +54,19 @@ class Fixture {
    *
    * @deprecated - use alsoRemove instead
    *
-   * @param data {Object}
+   * @param {Object} data - an object in the same format as what is passed to provision.  It only needs the fields
+   * defined that `remove` will need to remove the data.
    */
   addData(data) {
     return this.alsoRemove(data);
   }
 
   /**
-   * A convenience method for adding data that is generated during the execution of a test. Any data added with this method will be cleaned up when `.cleanup` is called.
+   * A convenience method for adding data that is generated during the execution of a test. Any data added with this
+   * method will be cleaned up when `.cleanup` is called.
    *
-   * @param data {Object}
+   * @param {Object} data - an object in the same format as what is passed to provision.  It only needs the fields
+   * defined that `remove` will need to remove the data.
    */
   alsoRemove(data) {
     return this.data.push(data);
@@ -77,7 +84,7 @@ class Fixture {
 
 /**
  * Helper for throwing not implemented errors for functions that are expected to be overridden
- * @param name
+ * @param {string} name
  */
 function notImplemented(name) {
   throw new Error(`${name} must be implmented in your data fixture`);
