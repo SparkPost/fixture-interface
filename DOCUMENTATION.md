@@ -184,7 +184,7 @@ Helper for throwing not implemented errors for functions that are expected to be
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| name | `string`  |  | &nbsp; |
+| name | `string`  | - Name of the function to implement | &nbsp; |
 
 
 
