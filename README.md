@@ -3,7 +3,7 @@
 `fixture-interface` is, as its name implies, an interface definition for creating fixtures during tests. 
 The idea is that every fixture can create and then cleanup data for a given test before and after the test to make tests
 highly isolated, repeatable, and stable.  This class must be extended to be used.  For detailed function documentation 
-see (DOCUMENTATION.md)[/DOCUMENTATION.md].
+see [DOCUMENTATION.md](/DOCUMENTATION.md).
 
 ## Installation
 ```bash
@@ -17,7 +17,7 @@ data source and then pass in relevant table or indexing information upon creatio
 different databases or projects using that same database.  Elasticsearch comes to mind as an example of such a database.  
 However, I've found that for databases with a little more structure (SQL or partial schema NoSQL), creating a fixture
 class for the database type and then extending that on a per table or schema basis has been most useful. Please refer to 
-the (examples directory)[/exmples] for a fully implemented fixture example as well as executable tests using the fixture.
+the [examples directory](/exmples) for a fully implemented fixture example as well as executable tests using the fixture.
 There are two examples of parent fixtures, one for an in memory store and another for AWS DynamoDB although it is not used
 in the exmaple tests. 
 

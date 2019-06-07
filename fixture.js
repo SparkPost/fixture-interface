@@ -6,8 +6,8 @@ const util = require('util');
 
 /**
  * The Fixture class is meant to be extended so that specific implementations share the same interface.  A
- * fixture is meant to supply data for testing purposes so that tests can be reliably repeatable.  See README.md for
- * more information to use fixtures and examples.
+ * fixture is meant to supply data for testing purposes so that tests can be reliably repeatable.  See
+ * [README.md](/README.md) for more information to use fixtures and examples.
  */
 class Fixture {
   /**
