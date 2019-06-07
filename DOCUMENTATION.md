@@ -40,18 +40,11 @@ Creates a distinct dataset for a test or test suite. Expects _insert and _remove
 
 
 
-#### Fixture.insert(data) 
+#### Fixture.insert() 
 
 Inserts one record into the data source. Intended to be overridden.
 
 
-
-
-##### Parameters
-
-| Name | Type | Description |  |
-| ---- | ---- | ----------- | -------- |
-| data | `Object`  | - a single data object to be inserted into the data source. | &nbsp; |
 
 
 
@@ -63,18 +56,11 @@ Inserts one record into the data source. Intended to be overridden.
 
 
 
-#### Fixture.remove(data) 
+#### Fixture.remove() 
 
 Removes one record from the data source. Intended to be overridden.
 
 
-
-
-##### Parameters
-
-| Name | Type | Description |  |
-| ---- | ---- | ----------- | -------- |
-| data | `Object`  | - a single data object to be inserted into the data source. | &nbsp; |
 
 
 
