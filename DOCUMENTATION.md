@@ -40,11 +40,18 @@ Creates a distinct dataset for a test or test suite. Expects _insert and _remove
 
 
 
-#### Fixture.insert() 
+#### Fixture.insert(data) 
 
 Inserts one record into the data source. Intended to be overridden.
 
 
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| data | `Object`  | - a single data object to be inserted into the data source. | &nbsp; |
 
 
 
@@ -56,11 +63,18 @@ Inserts one record into the data source. Intended to be overridden.
 
 
 
-#### Fixture.remove() 
+#### Fixture.remove(data) 
 
 Removes one record from the data source. Intended to be overridden.
 
 
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| data | `Object`  | - a single data object to be inserted into the data source. | &nbsp; |
 
 
 
@@ -83,7 +97,7 @@ Takes a given data set and uses the insert function to provision it.
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| jsonArray |  | {Array} - an array of data objects to be provisioned | &nbsp; |
+| jsonArray | `Array`  | - an array of data objects to be provisioned | &nbsp; |
 
 
 
@@ -91,7 +105,7 @@ Takes a given data set and uses the insert function to provision it.
 ##### Returns
 
 
-- `Promise`  - A promise that resolves with an array of the resulting insert resolutions.
+- `Promise`  A promise that resolves with an array of the resulting insert resolutions.
 
 
 
@@ -107,7 +121,7 @@ method will be cleaned up when `.cleanup` is called. (DEPRECATED IN FAVOR OF `al
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| data |  | {Object} | &nbsp; |
+| data | `Object`  | - an object in the same format as what is passed to provision. It only needs the fields defined that `remove` will need to remove the data. | &nbsp; |
 
 
 
@@ -121,7 +135,8 @@ method will be cleaned up when `.cleanup` is called. (DEPRECATED IN FAVOR OF `al
 
 #### Fixture.alsoRemove(data) 
 
-A convenience method for adding data that is generated during the execution of a test. Any data added with this method will be cleaned up when `.cleanup` is called.
+A convenience method for adding data that is generated during the execution of a test. Any data added with this
+method will be cleaned up when `.cleanup` is called.
 
 
 
@@ -130,7 +145,7 @@ A convenience method for adding data that is generated during the execution of a
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| data |  | {Object} | &nbsp; |
+| data | `Object`  | - an object in the same format as what is passed to provision. It only needs the fields defined that `remove` will need to remove the data. | &nbsp; |
 
 
 
@@ -169,7 +184,7 @@ Helper for throwing not implemented errors for functions that are expected to be
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| name |  |  | &nbsp; |
+| name | `string`  |  | &nbsp; |
 
 
 
