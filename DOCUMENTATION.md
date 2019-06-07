@@ -115,7 +115,7 @@ method will be cleaned up when `.cleanup` is called. (DEPRECATED IN FAVOR OF `al
 ##### Returns
 
 
-- `Void`
+- `number`  The number of items added to the internal cache.
 
 
 
@@ -139,7 +139,7 @@ method will be cleaned up when `.cleanup` is called.
 ##### Returns
 
 
-- `Void`
+- `number`  The number of items added to the internal cache.
 
 
 
