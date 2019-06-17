@@ -12,8 +12,10 @@
     "lodash": "^4.17.11"
   },
   "devDependencies": {
+    "doxdox": "^3.0.0",
     "eslint": "4.19.1",
-    "eslint-config-sparkpost": "1.4.1",
+    "eslint-config-sparkpost": "^2.0.0",
+    "husky": "^2.4.0",
     "jest": "^24.1.0",
     "sinon": "4.2.2"
   },
@@ -21,7 +23,11 @@
     "lint": "eslint --fix fixture.js test/unit/**/*.js",
     "test-ci": "jest test/unit/*.spec.js --ci --coverage --coverageDirectory='test/reports'",
     "test": "jest test/unit/*.spec.js --watch --coverage --coverageDirectory='test/reports'",
-    "example": "jest example/test --watch --coverage --coverageDirectory='example/test/reports'"
+    "example": "jest example/test --watch --coverage --coverageDirectory='example/test/reports'",
+    "chk-changelog": "grep `node -e 'console.log(require(\"./package.json\").version);'` CHANGELOG.md || (echo 'Please update CHANGELOG.md with your updates'; exit 255)",
+    "docs": "doxdox fixture.js --layout markdown --output DOCUMENTATION.md",
+    "nice-docs": "doxdox 'fixture.js' --layout bootstrap --output docs/index.html && open docs/index.html",
+    "prepublishOnly": "npm run chk-changelog"
   },
   "keywords": [
     "test",
@@ -32,5 +38,11 @@
     "url": "git+https://github.com/SparkPost/fixture-interface.git"
   },
   "author": "@Sparkpost",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run docs -- && git add DOCUMENTATION.md && if git commit --no-verify -m \"`git rev-parse --abbrev-ref HEAD` Updated Documentation\"; then exit 0; else echo 'No documentation updates'; fi "
+    }
+  }
 }
+
