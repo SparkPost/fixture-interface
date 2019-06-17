@@ -1,4 +1,4 @@
-# @sparkpost/fixture-interface *1.2.0*
+# @sparkpost/fixture-interface *1.2.1*
 
 > A simple interface to make helpers for setting up and tearing down data needed for tests.
 
