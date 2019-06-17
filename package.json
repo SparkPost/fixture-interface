@@ -1,6 +1,6 @@
 {
   "name": "@sparkpost/fixture-interface",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": false,
   "description": "A simple interface to make helpers for setting up and tearing down data needed for tests.",
   "main": "fixture.js",
@@ -45,4 +45,3 @@
     }
   }
 }
-
