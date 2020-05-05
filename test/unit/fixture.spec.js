@@ -5,6 +5,7 @@ describe('Fixture', function() {
   let Fixture
     , testFixture
     , insertStub
+    , batchInsertStub
     , removeStub;
 
   beforeAll(function() {
@@ -13,6 +14,7 @@ describe('Fixture', function() {
 
   beforeEach(function() {
     insertStub = sinon.stub().resolves('hi');
+    batchInsertStub = sinon.stub().resolves('10000 hellos');
     removeStub = sinon.stub().resolves('bye');
   });
 
@@ -51,6 +53,7 @@ describe('Fixture', function() {
     beforeEach(function() {
       testFixture = new Fixture();
       testFixture.insert = insertStub;
+      testFixture.batchInsert = batchInsertStub;
       testFixture.remove = removeStub;
     });
 
@@ -60,6 +63,17 @@ describe('Fixture', function() {
         expect(res[1]).toBe(2);
         expect(res[2]).toBe(3);
         expect(insertStub.callCount).toBe(3);
+        expect(testFixture.data.length).toBe(3);
+      });
+    });
+
+    it('should invoke invoke batchInsert once on a call to batchProvision', function() {
+      return testFixture.batchProvision([1, 2, 3]).then((res) => {
+        expect(res[0]).toBe(1);
+        expect(res[1]).toBe(2);
+        expect(res[2]).toBe(3);
+        expect(insertStub.callCount).toBe(0);
+        expect(batchInsertStub.callCount).toBe(1);
         expect(testFixture.data.length).toBe(3);
       });
     });
