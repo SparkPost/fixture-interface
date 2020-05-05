@@ -63,7 +63,7 @@ class Fixture {
   batchProvision(jsonArray) {
     return this.batchInsert(jsonArray).then(() => {
       return Promise.map(_.cloneDeep(jsonArray), (dataObj) => {
-        return this.data.push(jsonArray)
+        return this.data.push(dataObj)
       });
     });
   }
