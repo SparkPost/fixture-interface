@@ -56,6 +56,22 @@ Inserts one record into the data source. Intended to be overridden.
 
 
 
+#### Fixture.batchInsert() 
+
+Inserts many records into the data source. Intended to be overridden.
+
+
+
+
+
+
+##### Returns
+
+
+- `Void`
+
+
+
 #### Fixture.remove() 
 
 Removes one record from the data source. Intended to be overridden.
@@ -75,6 +91,31 @@ Removes one record from the data source. Intended to be overridden.
 #### Fixture.provision(jsonArray) 
 
 Takes a given data set and uses the insert function to provision it.
+The insert function will be called for every entry in jsonArray.
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| jsonArray | `Array`  | - an array of data objects to be provisioned | &nbsp; |
+
+
+
+
+##### Returns
+
+
+- `Promise`  A promise that resolves with an array of the resulting insert resolutions.
+
+
+
+#### Fixture.batchProvision(jsonArray) 
+
+Takes a given data set and uses the batchInsert function to provision it.
+The batchInsert function will be called once for the entire jsonArray.
 
 
 

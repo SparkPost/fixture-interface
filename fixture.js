@@ -25,6 +25,13 @@ class Fixture {
   }
 
   /**
+   * Inserts many records into the data source. Intended to be overridden.
+   */
+  batchInsert() {
+    notImplemented('batchInsert');
+  }
+
+  /**
    * Removes one record from the data source. Intended to be overridden.
    */
   remove() {
@@ -33,15 +40,32 @@ class Fixture {
 
   /**
    * Takes a given data set and uses the insert function to provision it.
+   * The insert function will be called for every entry in jsonArray.
    *
    * @param {Array} jsonArray - an array of data objects to be provisioned
    * @returns {Promise} A promise that resolves with an array of the resulting insert resolutions.
    */
   provision(jsonArray) {
-    return Promise.map(_.cloneDeep(jsonArray), (dataObj) =>
-      this.insert(dataObj).then(() =>
-        this.data.push(dataObj)
-      ));
+    return Promise.map(_.cloneDeep(jsonArray), (dataObj) => {
+      return this.insert(dataObj).then(() => {
+        return this.data.push(dataObj)
+      });
+    });
+  }
+
+  /**
+   * Takes a given data set and uses the batchInsert function to provision it.
+   * The batchInsert function will be called once for the entire jsonArray.
+   *
+   * @param {Array} jsonArray - an array of data objects to be provisioned
+   * @returns {Promise} A promise that resolves with an array of the resulting insert resolutions.
+   */
+  batchProvision(jsonArray) {
+    return this.batchInsert(jsonArray).then(() => {
+      return Promise.map(_.cloneDeep(jsonArray), (dataObj) => {
+        return this.data.push(dataObj)
+      });
+    });
   }
 
   /**
