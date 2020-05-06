@@ -14,3 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Added nodejs 10 to travis configuration
 - Updated linting rules to adhere to "lib" rules
 - Added npm scripts for generating function documentation
+
+## [1.3.0 - 2020-05-06][1.3.0]
+### Updated
+- Added support for batched provisioning
