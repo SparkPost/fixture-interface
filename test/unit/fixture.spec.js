@@ -57,7 +57,7 @@ describe('Fixture', function() {
       testFixture.remove = removeStub;
     });
 
-    it('should invoke invoke insert for each item passed to provision', function() {
+    it('should invoke insert for each item passed to provision', function() {
       return testFixture.provision([1, 2, 3]).then((res) => {
         expect(res[0]).toBe(1);
         expect(res[1]).toBe(2);
@@ -67,7 +67,7 @@ describe('Fixture', function() {
       });
     });
 
-    it('should invoke invoke batchInsert once on a call to batchProvision', function() {
+    it('should invoke batchInsert once on a call to batchProvision', function() {
       return testFixture.batchProvision([1, 2, 3]).then((res) => {
         expect(res[0]).toBe(1);
         expect(res[1]).toBe(2);
