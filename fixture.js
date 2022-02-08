@@ -46,7 +46,10 @@ class Fixture {
    * @returns {Promise} A promise that resolves with an array of the resulting insert resolutions.
    */
   provision(jsonArray) {
-    return Promise.map(_.cloneDeep(jsonArray), (dataObj) => this.insert(dataObj).then(() => this.data.push(dataObj)));
+    return Promise.map(_.cloneDeep(jsonArray), (dataObj) => this.insert(dataObj).then((insertResult) => {
+      this.data.push(dataObj);
+      return insertResult;
+    }));
   }
 
   /**
@@ -57,7 +60,7 @@ class Fixture {
    * @returns {Promise} A promise that resolves with an array of the resulting insert resolutions.
    */
   batchProvision(jsonArray) {
-    return this.batchInsert(jsonArray).then(() => Promise.map(_.cloneDeep(jsonArray), (dataObj) => this.data.push(dataObj)));
+    return this.batchInsert(jsonArray).then((batchInsertResult) => Promise.map(_.cloneDeep(jsonArray), (dataObj) => this.data.push(dataObj)).then(() => batchInsertResult));
   }
 
   /**
@@ -103,7 +106,7 @@ class Fixture {
  * @param {string} name - Name of the function to implement
  */
 function notImplemented(name) {
-  throw new Error(`${name} must be implmented in your data fixture`);
+  throw new Error(`${name} must be implemented in your data fixture`);
 }
 
 // depricate addData in favor `alsoRemove`

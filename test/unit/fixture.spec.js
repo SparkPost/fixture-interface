@@ -34,7 +34,7 @@ describe('Fixture', () => {
         constructorFixture.insert();
         throw new Error('why here?');
       } catch (err) {
-        expect(err.message).toBe('insert must be implmented in your data fixture');
+        expect(err.message).toBe('insert must be implemented in your data fixture');
       }
     });
 
@@ -44,7 +44,7 @@ describe('Fixture', () => {
         constructorFixture.remove();
         throw new Error('why here?');
       } catch (err) {
-        expect(err.message).toBe('remove must be implmented in your data fixture');
+        expect(err.message).toBe('remove must be implemented in your data fixture');
       }
     });
   });
@@ -57,18 +57,22 @@ describe('Fixture', () => {
       testFixture.remove = removeStub;
     });
 
-    it('should invoke insert for each item passed to provision', () => testFixture.provision([1, 2, 3]).then((res) => {
-      expect(res[0]).toBe(1);
-      expect(res[1]).toBe(2);
-      expect(res[2]).toBe(3);
-      expect(insertStub.callCount).toBe(3);
-      expect(testFixture.data.length).toBe(3);
-    }));
+    it('should invoke insert for each item passed to provision', () => {
+      insertStub.onCall(0).resolves('a');
+      insertStub.onCall(1).resolves('b');
+      insertStub.onCall(2).resolves('c');
+
+      return testFixture.provision([1, 2, 3]).then((res) => {
+        expect(res[0]).toBe('a');
+        expect(res[1]).toBe('b');
+        expect(res[2]).toBe('c');
+        expect(insertStub.callCount).toBe(3);
+        expect(testFixture.data.length).toBe(3);
+      });
+    });
 
     it('should invoke batchInsert once on a call to batchProvision', () => testFixture.batchProvision([1, 2, 3]).then((res) => {
-      expect(res[0]).toBe(1);
-      expect(res[1]).toBe(2);
-      expect(res[2]).toBe(3);
+      expect(res).toBe('10000 hellos');
       expect(insertStub.callCount).toBe(0);
       expect(batchInsertStub.callCount).toBe(1);
       expect(testFixture.data.length).toBe(3);
