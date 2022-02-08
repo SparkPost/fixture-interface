@@ -8,16 +8,15 @@
     "test": "test"
   },
   "dependencies": {
-    "bluebird": "3.5.1",
-    "lodash": "^4.17.11"
+    "bluebird": "^3.7.2",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "doxdox": "^3.0.0",
-    "eslint": "4.19.1",
-    "eslint-config-sparkpost": "^2.0.0",
-    "husky": "^2.4.0",
-    "jest": "^24.1.0",
-    "sinon": "4.2.2"
+    "eslint": "^8.8.0",
+    "eslint-config-sparkpost": "^3.0.0",
+    "husky": "^7.0.4",
+    "jest": "^27.5.1",
+    "sinon": "^13.0.1"
   },
   "scripts": {
     "lint": "eslint --fix fixture.js test/unit/**/*.js",
@@ -25,8 +24,6 @@
     "test": "jest test/unit/*.spec.js --watch --coverage --coverageDirectory='test/reports'",
     "example": "jest example/test --watch --coverage --coverageDirectory='example/test/reports'",
     "chk-changelog": "grep `node -e 'console.log(require(\"./package.json\").version);'` CHANGELOG.md || (echo 'Please update CHANGELOG.md with your updates'; exit 255)",
-    "docs": "doxdox fixture.js --layout markdown --output DOCUMENTATION.md",
-    "nice-docs": "doxdox 'fixture.js' --layout bootstrap --output docs/index.html && open docs/index.html",
     "prepublishOnly": "npm run chk-changelog"
   },
   "keywords": [
@@ -38,10 +35,5 @@
     "url": "git+https://github.com/SparkPost/fixture-interface.git"
   },
   "author": "@Sparkpost",
-  "license": "Apache-2.0",
-  "husky": {
-    "hooks": {
-      "pre-push": "npm run docs -- && git add DOCUMENTATION.md && if git commit --no-verify -m \"`git rev-parse --abbrev-ref HEAD` Updated Documentation\"; then exit 0; else echo 'No documentation updates'; fi "
-    }
-  }
+  "license": "Apache-2.0"
 }
