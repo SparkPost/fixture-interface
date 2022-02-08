@@ -1,6 +1,6 @@
 
 
-describe('Fixture', function() {
+describe('Fixture', () => {
   const sinon = require('sinon');
   let Fixture
     , testFixture
@@ -8,28 +8,28 @@ describe('Fixture', function() {
     , batchInsertStub
     , removeStub;
 
-  beforeAll(function() {
+  beforeAll(() => {
     Fixture = require('../../fixture');
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     insertStub = sinon.stub().resolves('hi');
     batchInsertStub = sinon.stub().resolves('10000 hellos');
     removeStub = sinon.stub().resolves('bye');
   });
 
-  describe('constructor', function() {
+  describe('constructor', () => {
     let constructorFixture;
 
-    beforeEach(function() {
+    beforeEach(() => {
       constructorFixture = new Fixture();
     });
 
-    it('should register the insert and remove methods', function() {
+    it('should register the insert and remove methods', () => {
       expect(constructorFixture.data).toEqual([]);
     });
 
-    it('shouldn\'t have an initial insert', function() {
+    it('shouldn\'t have an initial insert', () => {
       try {
         constructorFixture.insert();
         throw new Error('why here?');
@@ -39,7 +39,7 @@ describe('Fixture', function() {
     });
 
 
-    it('shouldn\'t have an initial remove', function() {
+    it('shouldn\'t have an initial remove', () => {
       try {
         constructorFixture.remove();
         throw new Error('why here?');
@@ -49,41 +49,37 @@ describe('Fixture', function() {
     });
   });
 
-  describe('methods', function() {
-    beforeEach(function() {
+  describe('methods', () => {
+    beforeEach(() => {
       testFixture = new Fixture();
       testFixture.insert = insertStub;
       testFixture.batchInsert = batchInsertStub;
       testFixture.remove = removeStub;
     });
 
-    it('should invoke insert for each item passed to provision', function() {
-      return testFixture.provision([1, 2, 3]).then((res) => {
-        expect(res[0]).toBe(1);
-        expect(res[1]).toBe(2);
-        expect(res[2]).toBe(3);
-        expect(insertStub.callCount).toBe(3);
-        expect(testFixture.data.length).toBe(3);
-      });
-    });
+    it('should invoke insert for each item passed to provision', () => testFixture.provision([1, 2, 3]).then((res) => {
+      expect(res[0]).toBe(1);
+      expect(res[1]).toBe(2);
+      expect(res[2]).toBe(3);
+      expect(insertStub.callCount).toBe(3);
+      expect(testFixture.data.length).toBe(3);
+    }));
 
-    it('should invoke batchInsert once on a call to batchProvision', function() {
-      return testFixture.batchProvision([1, 2, 3]).then((res) => {
-        expect(res[0]).toBe(1);
-        expect(res[1]).toBe(2);
-        expect(res[2]).toBe(3);
-        expect(insertStub.callCount).toBe(0);
-        expect(batchInsertStub.callCount).toBe(1);
-        expect(testFixture.data.length).toBe(3);
-      });
-    });
+    it('should invoke batchInsert once on a call to batchProvision', () => testFixture.batchProvision([1, 2, 3]).then((res) => {
+      expect(res[0]).toBe(1);
+      expect(res[1]).toBe(2);
+      expect(res[2]).toBe(3);
+      expect(insertStub.callCount).toBe(0);
+      expect(batchInsertStub.callCount).toBe(1);
+      expect(testFixture.data.length).toBe(3);
+    }));
 
-    it('should add an object to the data collection', function() {
+    it('should add an object to the data collection', () => {
       expect(testFixture.alsoRemove(1)).toBe(1);
       expect(testFixture.data.length).toBe(1);
     });
 
-    it('should remove all data', function() {
+    it('should remove all data', () => {
       testFixture.data.push(1,2,3);
 
       return testFixture.cleanup().then(() => {

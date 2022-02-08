@@ -46,11 +46,7 @@ class Fixture {
    * @returns {Promise} A promise that resolves with an array of the resulting insert resolutions.
    */
   provision(jsonArray) {
-    return Promise.map(_.cloneDeep(jsonArray), (dataObj) => {
-      return this.insert(dataObj).then(() => {
-        return this.data.push(dataObj)
-      });
-    });
+    return Promise.map(_.cloneDeep(jsonArray), (dataObj) => this.insert(dataObj).then(() => this.data.push(dataObj)));
   }
 
   /**
@@ -61,11 +57,7 @@ class Fixture {
    * @returns {Promise} A promise that resolves with an array of the resulting insert resolutions.
    */
   batchProvision(jsonArray) {
-    return this.batchInsert(jsonArray).then(() => {
-      return Promise.map(_.cloneDeep(jsonArray), (dataObj) => {
-        return this.data.push(dataObj)
-      });
-    });
+    return this.batchInsert(jsonArray).then(() => Promise.map(_.cloneDeep(jsonArray), (dataObj) => this.data.push(dataObj)));
   }
 
   /**
