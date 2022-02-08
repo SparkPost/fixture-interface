@@ -24,6 +24,7 @@
     "test": "jest test/unit/*.spec.js --watch --coverage --coverageDirectory='test/reports'",
     "example": "jest example/test --watch --coverage --coverageDirectory='example/test/reports'",
     "chk-changelog": "grep `node -e 'console.log(require(\"./package.json\").version);'` CHANGELOG.md || (echo 'Please update CHANGELOG.md with your updates'; exit 255)",
+    "prepare": "husky install",
     "prepublishOnly": "npm run chk-changelog"
   },
   "keywords": [
