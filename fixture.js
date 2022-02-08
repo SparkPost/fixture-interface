@@ -46,7 +46,7 @@ class Fixture {
    * @returns {Promise} A promise that resolves with an array of the resulting insert resolutions.
    */
   provision(jsonArray) {
-    return Promise.map(_.cloneDeep(jsonArray), (dataObj) => this.insert(dataObj).then((insertResult) => {
+    return Promise.mapSeries(_.cloneDeep(jsonArray), (dataObj) => this.insert(dataObj).then((insertResult) => {
       this.data.push(dataObj);
       return insertResult;
     }));

@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Removed documentation generation due to the utility library being unmaintained and severely out of date
 ### Updated
 - Updated all dependencies
+- Changed `provision` to execute inserts sequentially, ensuring order`
 
 ## [1.3.0 - 2020-05-06][1.3.0]
 ### Updated
