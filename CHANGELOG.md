@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Breaking Changes
 - Updated `provision` to return an array of results from `insert` instead of the result from `Array.push`
 - Removed documentation generation due to the utility library being unmaintained and severely out of date
+- Removed deprecated function `addData` in favor of using `alsoRemove`. 
 ### Updated
 - Updated all dependencies
 - Changed `provision` to execute inserts sequentially, ensuring order`

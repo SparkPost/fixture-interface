@@ -39,6 +39,16 @@ describe('Fixture', () => {
     });
 
 
+    it('shouldn\'t have an initial batchInsert', () => {
+      try {
+        constructorFixture.batchInsert();
+        throw new Error('why here?');
+      } catch (err) {
+        expect(err.message).toBe('batchInsert must be implemented in your data fixture');
+      }
+    });
+
+
     it('shouldn\'t have an initial remove', () => {
       try {
         constructorFixture.remove();
@@ -57,7 +67,7 @@ describe('Fixture', () => {
       testFixture.remove = removeStub;
     });
 
-    it('should invoke insert for each item passed to provision', () => {
+    it('should invoke insert for each item passed to provision and return an array including the resolution from each insert call', () => {
       insertStub.onCall(0).resolves('a');
       insertStub.onCall(1).resolves('b');
       insertStub.onCall(2).resolves('c');

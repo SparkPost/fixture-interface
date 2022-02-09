@@ -2,7 +2,6 @@
 
 const Promise = require('bluebird');
 const _ = require('lodash');
-const util = require('util');
 
 /**
  * The Fixture class is meant to be extended so that specific implementations share the same interface.  A
@@ -65,21 +64,6 @@ class Fixture {
 
   /**
    * A convenience method for adding data that is generated during the execution of a test. Any data added with this
-   * method will be cleaned up when `.cleanup` is called. (DEPRECATED IN FAVOR OF `alsoRemove`)
-   *
-   * @deprecated - use alsoRemove instead
-   *
-   * @param {Object} data - an object in the same format as what is passed to provision.  It only needs the fields
-   * defined that `remove` will need to remove the data.
-   *
-   * @returns {number} The number of items added to the internal cache.
-   */
-  addData(data) {
-    return this.alsoRemove(data);
-  }
-
-  /**
-   * A convenience method for adding data that is generated during the execution of a test. Any data added with this
    * method will be cleaned up when `.cleanup` is called.
    *
    * @param {Object} data - an object in the same format as what is passed to provision.  It only needs the fields
@@ -108,8 +92,5 @@ class Fixture {
 function notImplemented(name) {
   throw new Error(`${name} must be implemented in your data fixture`);
 }
-
-// depricate addData in favor `alsoRemove`
-util.deprecate(Fixture.prototype.addData, '`addData` has been deprecated in favor of `alsoRemove`', 'DEP0001');
 
 module.exports = Fixture;
