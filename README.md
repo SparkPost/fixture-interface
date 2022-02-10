@@ -14,7 +14,7 @@ npm i @sparkpost/fixture-interface
 The fixture interface class cannot be used on its own. Its intended to be extended with an implementation specific to a 
 data source or model.  For data sources with less structure, it may be enough to create a fixture class just for the 
 data source and then pass in relevant table or indexing information upon creation to make it reusable across several 
-different databases or projects using that same database.  Elasticsearch comes to mind as an example of such a database.  
+databases or projects using that same database.  Elasticsearch comes to mind as an example of such a database.  
 However, I've found that for databases with a little more structure (SQL or partial schema NoSQL), creating a fixture
 class for the database type and then extending that on a per table or schema basis has been most useful. Please refer to 
 the [examples directory](/example) for a fully implemented fixture example as well as executable tests using the fixture.
