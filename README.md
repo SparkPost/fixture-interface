@@ -3,7 +3,7 @@
 `fixture-interface` is, as its name implies, an interface definition for creating fixtures during tests. 
 The idea is that every fixture can create and then cleanup data for a given test before and after the test to make tests
 highly isolated, repeatable, and stable.  This class must be extended to be used.  For detailed function documentation 
-see [DOCUMENTATION.md](/DOCUMENTATION.md).
+see [DOCUMENTATION.md](/DOCUMENTATION.md).  For Long Term Support Schedule, please see: [LTS.md](/LTS.md).
 
 ## Installation
 ```bash
