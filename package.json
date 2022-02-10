@@ -20,8 +20,8 @@
   },
   "scripts": {
     "lint": "eslint --fix fixture.js test/unit/**/*.js",
-    "test-ci": "jest test/unit/*.spec.js --ci --coverage --coverageDirectory='test/reports/unit'",
-    "test": "jest test/unit/*.spec.js --watch --coverage --coverageDirectory='test/reports/unit'",
+    "test": "jest test/unit/*.spec.js --ci --coverage --coverageDirectory='test/reports/unit'",
+    "test-watch": "jest test/unit/*.spec.js --watch --coverage --coverageDirectory='test/reports/unit'",
     "example": "jest example/test --watch --coverage --coverageDirectory='example/test/reports'",
     "chk-changelog": "grep `node -e 'console.log(require(\"./package.json\").version);'` CHANGELOG.md || (echo 'Please update CHANGELOG.md with your updates'; exit 255)",
     "prepare": "husky install",
